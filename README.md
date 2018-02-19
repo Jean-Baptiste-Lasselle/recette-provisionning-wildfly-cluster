@@ -130,7 +130,12 @@ Les applications jee exemple peuvent être déployées de la manière suivante, 
 Ce "pseudo-pipeline" contient l'outillage: curl, git, jdk8 et maven, aussi les applications que vous
 développerez et/ou modifierez, sont déployables dans le cluster avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)
 
-
+# V. Testez votre Cluster
+ 
+ ...TODO....
+ la distribution fournira un petit outillage permettant d'exécuter et visualiser les résultats de tests:
+ * D'abord élémentaires 
+ * Puis intégrés dans une usine logicielle (avec du Jenkins, ELK, JMeter)
  
 # ANNEXE: référence structure du repo
 

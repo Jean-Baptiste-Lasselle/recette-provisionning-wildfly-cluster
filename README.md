@@ -104,22 +104,21 @@ Copier dans la VM "wildfly-master" le répertoire "./slave" , et exécutez les c
  
  https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test
 
-Pour déployer les applicatiosn web exemples, vous
-utiliserez un "pipeline" réduit à un simple conteneur docker.
+Lorsque vous avez terrminé les opérations, 3 applications exemple peuvent être déployées dans le cluster wildfly provisionnés. 
+Pour déployer ces applications web exemples, un outil a été installé: un "pseudo-pipeline" réduit à un simple conteneur docker.
+Exécutez 
+* `sudo docker ps -a` :  vous constaterez qu'un conteneur  nommé "pipelinetocluster" est "UP'N RUNNING". C'est notre "pseudo-pipeline".
 
-Les applications jee exemple peuvent être déployées de la manière suivante:
+Les applications jee exemple peuvent être déployées de la manière suivante, à l'aide de ce "pseudo-pipeline":
+
+* `sudo docker exec -it pipeline /deployer-appli-exemple-1` :  pour déployer lapplication exemple no.1
+* `sudo docker exec -it pipeline /deployer-appli-exemple-2` :  pour déployer lapplication exemple no.2
+* `sudo docker exec -it pipeline /deployer-appli-exemple-3` :  pour déployer lapplication exemple no.3
+
+Ce "pseudo-pipeline" contient l'outillage: curl, git, jdk8 et maven, aussi les applications que vous
+développerez et/ou modifierez, sont déployables dans le cluster avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)
 
 
-* `sudo docker ps -a`
-* `sudo docker exec -it pipeline /deployer-appli-exemple-1`
-* `sudo docker exec -it pipeline /deployer-appli-exemple-2`
-* `sudo docker exec -it pipeline /deployer-appli-exemple-3`
-
-
-Les applications que vous développerez et/ou modifierez, sont déployables dans
-ce pseudo-pipeline, avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)
-
-Le pipeline contient l'outillage: curl, git, jdk8 et maven
  
 # ANNEXE: référence structure du repo
 

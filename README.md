@@ -93,7 +93,7 @@ Les opérations se déroulent de la manière suivante, pour s'abstraire de l'aut
 
 ### 1. Exécution des opérations dans les VMs
 
-Copier dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les commandes:
+Copiez dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les commandes:
 
  `# resp. "cd ./master"...`
  
@@ -103,7 +103,7 @@ Copier dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les co
  
  `sudo ./operations.sh`
  
-Copier dans la VM "wildfly-master" le répertoire "./slave" , et exécutez les commandes:
+Copiez dans la VM "wildfly-master" le répertoire "./master" , et exécutez les commandes:
 
  `cd +x ./master`
  
@@ -116,8 +116,6 @@ Copier dans la VM "wildfly-master" le répertoire "./slave" , et exécutez les c
  
  ...TODO....
  
- https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test
-
 Lorsque vous avez terrminé les opérations, 3 applications exemple peuvent être déployées dans le cluster wildfly provisionnés. 
 Pour déployer ces applications web exemples, un outil a été installé: un "pseudo-pipeline" réduit à un simple conteneur docker.
 Exécutez 

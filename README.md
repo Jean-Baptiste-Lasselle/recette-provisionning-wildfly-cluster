@@ -94,14 +94,21 @@ Les opérations se déroulent de la manière suivante, pour s'abstraire de l'aut
 ### 1. Exécution des opérations dans les VMs
 
 Copier dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les commandes:
+
  `# resp. "cd ./master"...`
+ 
  `cd +x ./slave`
+ 
  `sudo chmod +x ./operations.sh`
+ 
  `sudo ./operations.sh`
  
 Copier dans la VM "wildfly-master" le répertoire "./slave" , et exécutez les commandes:
+
  `cd +x ./master`
+ 
  `sudo chmod +x ./operations.sh`
+ 
  `sudo ./operations.sh`
 
 

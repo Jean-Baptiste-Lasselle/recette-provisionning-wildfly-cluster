@@ -108,10 +108,10 @@ Pour déployer les applicatiosn web exemples, vous
 utiliserez un "pipeline" réduit à un simple conteneur docker.
 
 Les applications jee exemple peuvent être déployées de la manière suivante:
-	   `sudo docker ps -a`
-	   `sudo docker exec -it pipeline /deployer-appli-exemple-1`
-	   `sudo docker exec -it pipeline /deployer-appli-exemple-2`
-	   `sudo docker exec -it pipeline /deployer-appli-exemple-3`
+	   *`sudo docker ps -a`
+	   *`sudo docker exec -it pipeline /deployer-appli-exemple-1`
+	   *`sudo docker exec -it pipeline /deployer-appli-exemple-2`
+	   *`sudo docker exec -it pipeline /deployer-appli-exemple-3`
 
 Les applications que vous développerez et/ou modifierez, sont déployables dans
 ce pseudo-pipeline, avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)

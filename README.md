@@ -63,17 +63,23 @@ Pour vérifier vous même le nom de l'interface réseau linux qui a été créé
 Notez donc le nom de votre interface réseau.
 
 Dans mon cas, toujours à l'issue de l'installation de CentOS, le fichier `/etc/sysconfig/network-scripts/ifcfg-enp0s3` contient :
+
 `ONBOOT=no`
+
 Mon système ne fait donc pas usage de la carte réseau que j'ai configuré en "Accès par pont", avec VitualBox.
 Et comme dans mon cas il s'agit de la seule carte réseau, je n'ai donc en l'état, accès à aucun réseau.
 
 Pour permettre à ma VM d'accéder à au moins un réseau, et être accessible depuis d'autres machines, j'ai exécuté les commandes:
+
 `sudo sed -i 's/ONBOOT=no/ONBOOT=yes/g' /etc/sysconfig/network-scripts/ifcfg-enp0s3`
 `sudo systemctl restart network`
+
 Ce qui remplace la chaîne de caractères `ONBOOT=no`, par la chaîne de caractères `ONBOOT=yes` dans
-le fichier `/etc/sysconfig/network-scripts/ifcfg-enp0s3` (et redémarre le service réseau, pour lancer la séquence DHCP).
+le fichier:
 
-
+ `/etc/sysconfig/network-scripts/ifcfg-enp0s3` 
+ 
+(et redémarre le service réseau, pour lancer la séquence DHCP).
 
 ## IV. Procédez aux opérations.
 

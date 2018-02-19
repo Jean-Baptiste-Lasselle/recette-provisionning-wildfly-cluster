@@ -148,7 +148,7 @@ développerez et/ou modifierez, sont déployables dans le cluster avec le plugin
 * http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
 * l'image docker du conteneur mariaDB qui sera utilisé pour exploiter la base de données.
 * le driver jdbc à déployer dans le cluster jee.
-* l'applicatione exemple à déployer (cf. [ce repo](https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test) )
+* la première application exemple à déployer (sera très proche de [l'applciation versionnée par ce repo](https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test) )
 
 
 

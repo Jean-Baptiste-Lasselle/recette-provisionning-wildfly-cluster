@@ -72,6 +72,7 @@ Et comme dans mon cas il s'agit de la seule carte réseau, je n'ai donc en l'ét
 Pour permettre à ma VM d'accéder à au moins un réseau, et être accessible depuis d'autres machines, j'ai exécuté les commandes:
 
 `sudo sed -i 's/ONBOOT=no/ONBOOT=yes/g' /etc/sysconfig/network-scripts/ifcfg-enp0s3`
+
 `sudo systemctl restart network`
 
 Ce qui remplace la chaîne de caractères `ONBOOT=no`, par la chaîne de caractères `ONBOOT=yes` dans

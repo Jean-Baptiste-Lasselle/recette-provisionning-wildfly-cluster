@@ -111,9 +111,9 @@ Les applications jee exemple peuvent être déployées de la manière suivante:
 
 
 * `sudo docker ps -a`
-* sudo docker exec -it pipeline /deployer-appli-exemple-1
-* sudo docker exec -it pipeline /deployer-appli-exemple-2
-* sudo docker exec -it pipeline /deployer-appli-exemple-3
+* `sudo docker exec -it pipeline /deployer-appli-exemple-1`
+* `sudo docker exec -it pipeline /deployer-appli-exemple-2`
+* `sudo docker exec -it pipeline /deployer-appli-exemple-3`
 
 
 Les applications que vous développerez et/ou modifierez, sont déployables dans

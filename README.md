@@ -118,9 +118,9 @@ Exécutez
 
 Les applications jee exemple peuvent être déployées de la manière suivante, à l'aide de ce "pseudo-pipeline":
 
-* `sudo docker exec -it pipeline /deployer-appli-exemple-1` :  pour déployer lapplication exemple no.1
-* `sudo docker exec -it pipeline /deployer-appli-exemple-2` :  pour déployer lapplication exemple no.2
-* `sudo docker exec -it pipeline /deployer-appli-exemple-3` :  pour déployer lapplication exemple no.3
+* `sudo docker exec -it pipeline /deployer-appli-exemple-1` :  pour déployer l'application exemple no.1
+* `sudo docker exec -it pipeline /deployer-appli-exemple-2` :  pour déployer l'application exemple no.2
+* `sudo docker exec -it pipeline /deployer-appli-exemple-3` :  pour déployer l'application exemple no.3
 
 Ce "pseudo-pipeline" contient l'outillage: curl, git, jdk8 et maven, aussi les applications que vous
 développerez et/ou modifierez, sont déployables dans le cluster avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)
@@ -145,10 +145,14 @@ développerez et/ou modifierez, sont déployables dans le cluster avec le plugin
 * unzip
 
 ## Dépendances:
+
+### de cette recette
 * http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
 * l'image docker du conteneur mariaDB qui sera utilisé pour exploiter la base de données.
+
+### des déploiements jee
 * le driver jdbc à déployer dans le cluster jee.
-* la première application exemple à déployer (sera très proche de [l'applciation versionnée par ce repo](https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test) )
+* l'application exemple no.1 à déployer (sera très proche de [l'application versionnée par ce repo](https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test) )
 
 
 

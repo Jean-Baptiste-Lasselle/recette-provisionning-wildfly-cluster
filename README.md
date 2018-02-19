@@ -154,8 +154,8 @@ développerez et/ou modifierez, sont déployables dans le cluster avec le plugin
 ## Dépendances:
 
 ### de cette recette
-* http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
-* l'image docker du conteneur mariaDB qui sera utilisé pour exploiter la base de données.
+* L'archive [zip d'installation de wildfly](http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip).
+* l'[image docker du conteneur mariaDB](https://hub.docker.com/_/mariadb/) qui sera utilisé pour exploiter la base de données.
 
 ### des déploiements jee
 * le driver jdbc à déployer dans le cluster jee.

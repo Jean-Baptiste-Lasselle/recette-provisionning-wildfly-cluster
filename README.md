@@ -129,15 +129,17 @@ Le pipeline contient l'outillage: curl, git, jdk8 et maven
 
 # ANNEXE: Dépendances
 
-* Meta dépendances (les opérations pourrainet provisionner exactement le même résultat au byte prêt, tout en utilisant des alternatives aux méta dépendances):
-** me, myself, and I: le repo github de cette recette (je dépends de moi-même.../réflexivité)
-** docker-ce
-** unzip
-* Dépendances:
-** http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
-** l'image docker du conteneur mariaDB qui sera utilisé pour exploiter la base de données.
-** le driver jdbc à déployer dans le cluster jee.
-** l'applicatione exemple à déployer (cf. repo [https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test)
+## Meta dépendances 
+(les opérations pourraient provisionner exactement le même résultat au byte prêt, tout en utilisant des alternatives aux méta dépendances):
+* me, myself, and I: le repo github de cette recette (je dépends de moi-même.../réflexivité)
+* docker-ce
+* unzip
+
+## Dépendances:
+* http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
+* l'image docker du conteneur mariaDB qui sera utilisé pour exploiter la base de données.
+* le driver jdbc à déployer dans le cluster jee.
+* l'applicatione exemple à déployer (cf. repo [https://github.com/Jean-Baptiste-Lasselle/lauriane-deployeur-test)
 
 
 

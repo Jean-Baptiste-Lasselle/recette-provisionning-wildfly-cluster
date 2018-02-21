@@ -7,7 +7,7 @@ Chaque release de ce repo référence une recette de déploiement d'un cluster w
 Les release à venir sont:
 * [v1.0.0](#résumé) [[2 machines]](#résumé): cette recette livrera un cluster Wildfly sur 2 VMs (1 "master", et 1 "slave"), et a été écrit en analysant en détail la [documentation officielle redhat](https://docs.jboss.org/author/display/WFLY/High+Availability+Guide), en particulier [cette section](https://docs.jboss.org/author/display/WFLY/Clustering+and+Domain+Setup+Walkthrough).
 * [v1.0.1](#résumé) [[3 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette comprendra de plsu des tests qui permettront de vérifier l'effectivité du "failover", d'un "slave", vers l'autre
-* [v1.0.2](#résumé) [[4 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette livrera de plus, dans une 4ième VM: une instance Jenkins, une instance JMeter ("en mode serveur" .bin\jmeter-server.sh ...) + PerfMonplugin, et Taurus.
+* [v1.0.2](#résumé) [[4 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette livrera de plus, dans une 4ième VM: une instance Jenkins, une instance JMeter ("en mode serveur" .bin\jmeter-server.sh ...) + PerfMonplugin, et une instance [Taurus](https://gettaurus.org/).
 
 En vous guidant de cette page de documentation, vous crééerez 2 machines virtuelles, exécuterez
 des opératiosn sur ces 2 VMs en vous guidant avec cette page de documentation, et obtiendrez:

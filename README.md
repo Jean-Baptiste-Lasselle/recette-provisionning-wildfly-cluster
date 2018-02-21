@@ -2,6 +2,13 @@
 
 Ce repo est une recette d'installation / configuration pour mettre en place un cluster jee, avec [wildfly](http://wildfly.org/).
 
+Chaque release de ce repo référence une recette de déploiement d'un cluster wildfly.
+
+Les release à venir sont:
+* [v1.0.0](#) [[2 machines]](#): cette recette livrera un cluster Wildfly sur 2 VMs (1 "master", et 1 "slave"), et a été écrit en analysant en détail la [documentation officielle redhat](https://docs.jboss.org/author/display/WFLY/High+Availability+Guide), en particulier [cette section](https://docs.jboss.org/author/display/WFLY/Clustering+and+Domain+Setup+Walkthrough).
+* [v1.0.1](#) [[3 machines]](#): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette comprendra de plsu des tests qui permettront de vérifier l'effectivité du "failover", d'un "slave", vers l'autre
+* [v1.0.2](#) [[4 machines]](#): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette livrera de plus, dans une 4ième VM: une instance Jenkins, une instance JMeter ("en mode serveur" .bin\jmeter-server.sh ...) + PerfMonplugin, et Taurus.
+
 En vous guidant de cette page de documentation, vous crééerez 2 machines virtuelles, exécuterez
 des opératiosn sur ces 2 VMs en vous guidant avec cette page de documentation, et obtiendrez:
 * dans une VM, le "master" du cluster wildfly 
@@ -9,7 +16,9 @@ des opératiosn sur ces 2 VMs en vous guidant avec cette page de documentation, 
 * toutes les instances d'applications web, qu'elles soient dans une VM ou l'autre, accèderont à une unique instance de BDD, dans le conteneur mariaDB de la VM contenant le "slave".
 
 # IMPORTANT
+
 Ce repo n'est pas encore (19/02/2018) utilisable:
+
 * Le repo est en cours de développement
 * la doc que vous lisez et l'état du repo ne sont pas encore synchrones
 
@@ -18,8 +27,8 @@ Ce repo n'est pas encore (19/02/2018) utilisable:
 ## I. créez 2 VM 
 
 J'ai appelé, et appelerai dans toute la docuemntation présente dans ce repo:
-* "wildfly-master": la première VM, dans laquelle nous installerons et configurerons l'insztance wildfly  maître du cluster
-* "wildfly-slave": la première VM, dans laquelle nous installerons et configurerons une instance wildfly esclave du cluster
+* "wildfly-master": la première VM, dans laquelle nous installerons et configurerons l'instance wildfly  maître du cluster
+* "wildfly-slave": la seconde VM, dans laquelle nous installerons et configurerons une instance wildfly esclave du cluster
 
 ### Ma configuration de travail pour les tests.
 
@@ -86,10 +95,10 @@ le fichier:
 
 Les opérations se déroulent de la manière suivante, pour s'abstraire de l'automatisation sur le poste client et l'OS que vous utilisez:
 * On exécute une recette dans la VM "wildfly-master", puis dans  la VM "wildfly-slave": on 
-* On déploie une première application Jee dans le cluster: Cette application est uen application Web simple, et on vérifiera avec l'admin wildfly web que l'application a bien été déployée à la fois dans la VM "wildfly-master" et dans la VM "wildfly-slave". On vérifiera le bon fonctionneement de cette application, qui a un fonctionneemtn minimal: la page par défaut de cette applicationa ffiche les données insérées préalablement dans une BDD. Le test consistera à charger l'application une première fois, insérer des données avec un script SQL, puis charger à nouveau l'application et constater l'afficahge correct sans erreurs ou exception, des données avant et après insertion.
-* [Bientôt dans ce tutoriel] On déploie une deuxième application Web Jee dans le cluster: cette application est simple, fait usage de sessions HTTP, de sessions Hibernate, et on vérifie la réplication InfiniSpan des sessions HTTP et Hibernate en lançant un deuxième "slave", pour le tuer en pleine exécution. L'application est basée sur une auth classique email/pwd, et un panier de shopping stockée session HTTP.
-* [Bientôt dans ce tutoriel] On déploie une troisième application Web Jee dans le cluster: cette application est simple, fait usage de sessions HTTP, de sessions Hibernate, mais surtout aussi de sessions EJB Stateful Session Bean ("SFSB's"), on fait les vérificatiosn de réplication InfiniSpan
-* [Bientôt dans ce tutoriel] Les deux cas précédents ont permis de tester le "fail-over". Un dernier volet de ce tutoriel consistera à arriver à déclencher le load balancing dans le cas d'un cluster à 1 maître/ 2 esclaves. On utilisera JMeter pour fournir la charge. Et on utilisera l'utilitaire "VBoxManage": `VBoxManage modifyvm "wildfly-slave2" --nictrace1 on --nictracefile1 log-reseau-wildfly-slave-a-lire-ac-wireshark.pcap` pour constater le load balancing dans les trames réseau. 
+* On déploie une première application Jee dans le cluster: Cette application est une application Web simple, et on vérifiera avec l'admin wildfly web que l'application a bien été déployée à la fois dans la VM "wildfly-master" et dans la VM "wildfly-slave". On vérifiera le bon fonctionneement de cette application, qui a un fonctionneemtn minimal: la page par défaut de cette applicationa ffiche les données insérées préalablement dans une BDD. Le test consistera à charger l'application une première fois, insérer des données avec un script SQL, puis charger à nouveau l'application et constater l'afficahge correct sans erreurs ou exception, des données avant et après insertion.
+* [Bientôt dans ce repo] On déploie une deuxième application Web Jee dans le cluster: cette application est simple, fait usage de sessions HTTP, de sessions Hibernate, et on vérifie la réplication InfiniSpan des sessions HTTP et Hibernate en lançant un deuxième "slave", pour le tuer en pleine exécution. L'application est basée sur une authentification, et un panier d'achats stocké en session HTTP.
+* [Bientôt dans ce repo] On déploie une troisième application Web Jee dans le cluster: cette application est simple, fait usage de sessions HTTP, de sessions Hibernate, mais surtout aussi de sessions EJB Stateful Session Bean ("SFSB's"), on fait les vérificatiosn de réplication InfiniSpan
+* [Bientôt dans ce repo] Les deux cas précédents ont permis de tester le "fail-over". Un dernier volet de ce tutoriel consistera à arriver à déclencher le load balancing dans le cas d'un cluster à 1 maître/ 2 esclaves. On utilisera JMeter pour fournir la charge. Et on utilisera l'utilitaire "VBoxManage": `VBoxManage modifyvm "wildfly-slave2" --nictrace1 on --nictracefile1 log-reseau-wildfly-slave-a-lire-ac-wireshark.pcap` pour constater le load balancing dans les trames réseau. 
 
 ### 1. Exécution des opérations dans les VMs
 

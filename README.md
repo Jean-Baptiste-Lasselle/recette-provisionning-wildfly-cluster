@@ -154,7 +154,9 @@ Les applications jee exemple peuvent être déployées de la manière suivante, 
 * `sudo docker exec -it oleoduc /deployer-appli-exemple-1` :  pour déployer l'application exemple no.1
 * `sudo docker exec -it oleoduc /deployer-appli-exemple-2` :  pour déployer l'application exemple no.2
 * `sudo docker exec -it oleoduc /deployer-appli-exemple-3` :  pour déployer l'application exemple no.3
-* `sudo docker exec -it oleoduc /deployer-appli-web-jee /chemin/vers/le/fichier/une-appli-que-vous-developpez.war` :  pour déployer une application quelconque
+* `sudo docker exec -it oleoduc /deployer-appli-web-jee /chemin/vers/le/fichier/une-appli-que-vous-developpez.war` :  pour déployer un module jee web que vous développez
+* `sudo docker exec -it oleoduc /deployer-appli-web-jee /chemin/vers/le/fichier/une-appli-que-vous-developpez.ear` :  pour déployer un module jee "d'entreprise" que vous développez
+* `sudo docker exec -it oleoduc /deployer-appli-web-jee /chemin/vers/le/fichier/une-appli-que-vous-developpez.jar` :  pour déployer un composant java (que vous développez, ou non, ex. un driver JDBC) en tant que module dans wildfly
 
 Ce "pseudo-pipeline" contient l'outillage: curl, git, jdk8 et maven, aussi les applications que vous
 développerez et/ou modifierez, sont déployables dans le cluster avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)

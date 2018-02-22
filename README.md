@@ -42,7 +42,7 @@ Ce repo n'est pas encore (19/02/2018) utilisable:
 
 ## I. Provisionnez les machines
 
-Il s'agira de provisionner, soit en créant des machines virtuelles, soit en provisionnant des machines physiques, 2 machines.
+Il s'agira de provisionner 2 machines virtuelles.  
 
 
 ### Ma configuration de travail pour les tester cette recette.
@@ -65,7 +65,10 @@ C'est un peu comme si "PCtravail" et la MV étaient totue deux branchée à un s
 
 ### Configuration hardware à apppliquer
 
-Pour chaque VM, il vous faudra au moins une carte réseau virtuelle, configurée en mode "Accès par pont" ("Bridged Network", pour les installations anglophones).
+* Pour chaque VM, il vous faudra au moins une carte réseau virtuelle, configurée en mode "Accès par pont" ("Bridged Network", pour les installations anglophones).
+* Pour chaque VM, je recommande 4096 Go de RAM aux 2 VMs
+* Pour chaque VM, je recommande 2 vCPUs
+
 
 ### pré-requis
 

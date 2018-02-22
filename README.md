@@ -133,7 +133,7 @@ Copiez dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les co
  
 Copiez dans la VM "wildfly-master" le répertoire "./master" , et exécutez les commandes:
 
- `cd +x ./master`
+ `cd ./master`
  
  `sudo chmod +x ./operations.sh`
  

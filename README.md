@@ -15,7 +15,7 @@ Dans toute la documentation de cette recette, je désignerai par:
 * dans `wildfly-master`: une instance wildfly en exécution, maître du cluster wildfly,
 * dans `wildfly-slave`: une instance wildfly en exécution, esclave du cluster wildfly,
 * dans `wildfly-slave`: un conteneur docker en exécution, contenant une instance mariaDB, de nom "`sgbdr-mariadb`".
-* dans `wildfly-slave`: un conteneur docker de nom "`ops-app-exemples`" (non-démarré), qui peut être utilisé pour déployer les applications exemples. Dans ce conteneur: git 2.x, jdk 8.x, maven 3.x.
+* dans `wildfly-slave`: un conteneur docker de nom "`oleoduc`" (non-démarré), qui peut être utilisé pour déployer les applications exemples. Dans ce conteneur: git 2.x, jdk 8.x, maven 3.x.
 
 Toutes les instances d'applications web déployées dans le cluster, accèderont à une unique instance de BDD, gérée
 par mariaDB dans le conteneur docker présent dans `wildfly-slave`.

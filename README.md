@@ -67,7 +67,7 @@ C'est un peu comme si "PCtravail" et la MV étaient totue deux branchée à un s
 
 
 
-![architecture globale détaillée](https://github.com/Jean-Baptiste-Lasselle/recette-provisionning-wildfly-cluster/tree/master/documentation/images/architecture-globale-detaillee.png "architecture globale détaillée")
+![architecture globale détaillée](https://github.com/Jean-Baptiste-Lasselle/recette-provisionning-wildfly-cluster/raw/master/documentation/images/architecture-globale-detaillee.png "architecture globale détaillée")
 
 ### Configuration hardware à apppliquer
 

@@ -147,16 +147,25 @@ Copiez dans la VM "wildfly-master" le répertoire "./master" , et exécutez les 
 Lorsque vous avez terrminé les opérations, 3 applications exemple peuvent être déployées dans le cluster wildfly provisionnés. 
 Pour déployer ces applications web exemples, un outil a été installé: un "pseudo-pipeline" réduit à un simple conteneur docker.
 Exécutez 
-* `sudo docker ps -a` :  vous constaterez qu'un conteneur  nommé "pipelinetocluster" est "UP'N RUNNING". C'est notre "pseudo-pipeline".
+* `sudo docker ps -a` :  vous constaterez qu'un conteneur  nommé "`oleoduc`" est "UP'N RUNNING". C'est notre "pseudo-pipeline".
 
 Les applications jee exemple peuvent être déployées de la manière suivante, à l'aide de ce "pseudo-pipeline":
 
-* `sudo docker exec -it pipeline /deployer-appli-exemple-1` :  pour déployer l'application exemple no.1
-* `sudo docker exec -it pipeline /deployer-appli-exemple-2` :  pour déployer l'application exemple no.2
-* `sudo docker exec -it pipeline /deployer-appli-exemple-3` :  pour déployer l'application exemple no.3
+* `sudo docker exec -it oleoduc /deployer-appli-exemple-1` :  pour déployer l'application exemple no.1
+* `sudo docker exec -it oleoduc /deployer-appli-exemple-2` :  pour déployer l'application exemple no.2
+* `sudo docker exec -it oleoduc /deployer-appli-exemple-3` :  pour déployer l'application exemple no.3
+* `sudo docker exec -it oleoduc /deployer-appli-web-jee /chemin/vers/le/fichier/une-appli-que-vous-developpez.war` :  pour déployer une application quelconque
 
 Ce "pseudo-pipeline" contient l'outillage: curl, git, jdk8 et maven, aussi les applications que vous
 développerez et/ou modifierez, sont déployables dans le cluster avec le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/)
+Notons que le côté intéressant du le plugin maven ["wildfly-maven-plugin"](https://docs.jboss.org/wildfly/plugins/maven/latest/), est à la fois sa
+nature de plugin (modulaire), et le fait qu'il constitue un packaging possible pour utiliser le client "jboss-cli" en "standalone":
+Sous cette forme il est possible d'utiliser le client jboss-cli indépendamment de tout autre, on peut l'tuilsier "seul" (ou presque, il y a MAVEN).
+Ce qui le rends très agile, ou tout du moins au plus, aussi agile que la moins agile de ses dépendances. La seule dépendance étant MAVEN3, on peut considérer que 
+ce composant est une distribution du client "jboss-cli" aussi agile que MAVEN3. (Si le client jboss-cli dégradait significativement l'agilité de MAVEN3, cela se
+serait remarqué...).
+
+
 
 # V. Testez votre Cluster
  

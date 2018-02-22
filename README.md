@@ -63,6 +63,12 @@ carte réseau en "Accès par pont", pourra se voir aussi attribuer une configura
 Une telle VM est comme elle même physiquement branchée à ma box.
 C'est un peu comme si "PCtravail" et la MV étaient totue deux branchée à un switch, et le switch branché à ma box
 
+### Schema Architecture générale
+
+
+
+![architecture globale détaillée](https://github.com/Jean-Baptiste-Lasselle/recette-provisionning-wildfly-cluster/tree/master/documentation/images/architecture-globale-detaillee.png "architecture globale détaillée")
+
 ### Configuration hardware à apppliquer
 
 * Pour chaque VM, il vous faudra au moins une carte réseau virtuelle, configurée en mode "Accès par pont" ("Bridged Network", pour les installations anglophones).

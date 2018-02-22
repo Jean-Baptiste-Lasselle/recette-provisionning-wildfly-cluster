@@ -1,19 +1,35 @@
 # Résumé
 
-Ce repo est une recette d'installation / configuration pour mettre en place un cluster jee, avec [wildfly](http://wildfly.org/).
+Ce repo est une recette d'installation / configuration / test pour un cluster jee [wildfly](http://wildfly.org/).
 
-Chaque release de ce repo référence une recette de déploiement d'un cluster wildfly.
 
-Les release à venir sont:
-* [v1.0.0](#résumé) [[2 machines]](#résumé): cette recette livrera un cluster Wildfly sur 2 VMs (1 "master", et 1 "slave"), et a été écrit en analysant en détail la [documentation officielle redhat](https://docs.jboss.org/author/display/WFLY/High+Availability+Guide), en particulier [cette section](https://docs.jboss.org/author/display/WFLY/Clustering+and+Domain+Setup+Walkthrough).
-* [v1.0.1](#résumé) [[3 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette comprendra de plus des tests qui permettront de vérifier l'effectivité du "failover", d'un "slave", vers l'autre
-* [v1.0.2](#résumé) [[4 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette livrera de plus, dans une 4ième VM: une instance Jenkins, une instance JMeter ("en mode serveur" .bin\jmeter-server.sh ...) + PerfMonplugin, et une instance [Taurus](https://gettaurus.org/).
 
 En vous guidant de cette page de documentation, vous crééerez 2 machines virtuelles, exécuterez
-des opératiosn sur ces 2 VMs en vous guidant avec cette page de documentation, et obtiendrez:
-* dans une VM, le "master" du cluster wildfly 
-* dans l'autre VM, le "slave" du cluster wildfly, docker, et un seul conteneur docker contenant mariaDB.
-* toutes les instances d'applications web, qu'elles soient dans une VM ou l'autre, accèderont à une unique instance de BDD, dans le conteneur mariaDB de la VM contenant le "slave".
+des opérations sur ces 2 VMs, pour obtenir un cluster wildfly prêt à recevoir des déploiement de modules jee.
+
+Dans toute la documentation de cette recette, je désignerai par:
+* "`wildfly-master`": la première VM, dans laquelle nous installerons et configurerons l'instance wildfly  maître du cluster
+* "`wildfly-slave`": la seconde VM, dans laquelle nous installerons et configurerons une instance wildfly esclave du cluster
+
+À l'issue de ces opérations, vous trouverez:
+* dans `wildfly-master`: une instance wildfly en exécution, maître du cluster wildfly,
+* dans `wildfly-slave`: une instance wildfly en exécution, esclave du cluster wildfly,
+* dans `wildfly-slave`: un conteneur docker en exécution, contenant une instance mariaDB, de nom "`sgbdr-mariadb`".
+* dans `wildfly-slave`: un conteneur docker de nom "`ops-app-exemples`" (non-démarré), qui peut être utilisé pour déployer les applications exemples. Dans ce conteneur: git 2.x, jdk 8.x, maven 3.x.
+
+Toutes les instances d'applications web déployées dans le cluster, accèderont à une unique instance de BDD, gérée
+par mariaDB dans le conteneur docker présent dans `wildfly-slave`.
+
+Chaque release de ce repo référence une recette de déploiement d'un cluster wildfly.
+Les release à venir sont:
+* [v1.0.0](#résumé) [[2 machines]](#résumé): cette recette livrera un cluster Wildfly sur 2 VMs (1 "master", et 1 "slave"), et a été écrit en analysant en détail la [documentation officielle redhat](https://docs.jboss.org/author/display/WFLY/High+Availability+Guide), en particulier [cette section](https://docs.jboss.org/author/display/WFLY/Clustering+and+Domain+Setup+Walkthrough).
+* [v1.0.1](#résumé) [[3 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette comprendra de plus des scripts de tests, qui permettront de vérifier l'effectivité du "failover", d'un "slave", vers l'autre.
+* [v1.0.2](#résumé) [[4 machines]](#résumé): cette recette livrera un cluster Wildfly sur 3 VMs (1 "master", et 2 "slave"). Cette recette livrera de plus, dans une 4ième VM "`VMtestantLeCluster`": une instance Jenkins, une instance JMeter ("en mode serveur" .bin\jmeter-server.sh ...) + PerfMonplugin, et une instance [Taurus](https://gettaurus.org/). Cette receette livrera `VMtestantLeCluster` dans un état tel que des tests JMeter, et leur reporting, sont automatisés et lançables à la demande, qui permettront de vérifier l'effectivité du "load balancing", d'un "slave", vers l'autre.
+* [v2.0.0](#résumé) [[8 machines]](#résumé): cette recette livrera les mêmes éléments que la version [1.0.2], mais cette fois MariaDB sera "clusterisé": MariaDB sera installé sans conteneurs Docker, dans 3 VMs. [3 machines pour le cluster wildfly, 3 machines pour le cluster MariaDB, 2 machines pour l'outillage de tests/reporting tests (Jenkins, JMeter + PerfMonplugin, Taurus)]
+* [v3.0.0](#résumé) [[6 + N machines]](#résumé): cette fois on déploiera les applications jee dans wildfly, wildfly étant installé dans Kuberntes. Ces applications feront usage d'une BDD dans un cluster MariaDB. 3 machines Kubernetes + 3 machines cluster MariaDB + N machines usine logicielle
+
+
+
 
 # IMPORTANT
 
@@ -22,26 +38,27 @@ Ce repo n'est pas encore (19/02/2018) utilisable:
 * Le repo est en cours de développement
 * la doc que vous lisez et l'état du repo ne sont pas encore synchrones
 
-# Comment utilsier ce repo?
+# Comment utiliser ce repo?
 
 ## I. Provisionnez les machines
 
 Il s'agira de provisionner, soit en créant des machines virtuelles, soit en provisionnant des machines physiques, 2 machines.
 
-J'ai appelé, et appelerai dans toute la documentation présente dans ce repo:
-* "`wildfly-master`": la première VM, dans laquelle nous installerons et configurerons l'instance wildfly  maître du cluster
-* "wildfly-slave": la seconde VM, dans laquelle nous installerons et configurerons une instance wildfly esclave du cluster
 
 ### Ma configuration de travail pour les tester cette recette.
 
-J'ai simplement utilisé VirtualBox sur un PC 16 Go RAM. Notons ma machien "PCtravail".
-"PCtravail" est branché à un switch, et le switch est directement branché à ma box.
-"PCtravail" est configuré en DHCP.
+J'ai simplement utilisé VirtualBox sur un PC 16 Go RAM. Notons ma machine "`PCtravail`".
+* `PCtravail` est branché à un switch, et le switch est directement branché à ma box FAI.
+* L'OS de `PCtravail` a une configuration IP en DHCP.
 
-Ayant fait cela, et étant donné que mon PC "PCtravail" est branché directement à ma box, c'est
-ma box qui fait office de serveur DHCP, et attribue donc une configuration IP à "PCtravail".
+Dans la box que mon fournisseur d'accès internet m'a fournie, un serveur DHCP est isntallé en tant que service.
+C'est sans doute le cas du routeur/wifi que vous a fournit votre FAI.
 
-Dans cette situation, une VM créée avec VirtualBox dans "PCtravail", avec une
+Etant donné que mon PC `PCtravail` est branché directement à ma box, c'est
+ma box qui fait office de serveur DHCP, et attribue donc une configuration IP à `PCtravail`.
+En effet, 
+
+Dans cette situation, une VM créée avec VirtualBox dans `PCtravail`, avec une
 carte réseau en "Accès par pont", pourra se voir aussi attribuer une configuration IP par ma box:
 Une telle VM est comme elle même physiquement branchée à ma box.
 C'est un peu comme si "PCtravail" et la MV étaient totue deux branchée à un switch, et le switch branché à ma box

@@ -125,7 +125,7 @@ Copiez dans la VM "wildfly-slave" le répertoire "./slave" , et exécutez les co
 
  `# resp. "cd ./master"...`
  
- `cd +x ./slave`
+ `cd ./slave`
  
  `sudo chmod +x ./operations.sh`
  
